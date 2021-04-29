@@ -7,23 +7,23 @@ public class Demo {
 
 	public static void main(String[] args) {
 
-		Instructor instructorType = new Instructor("Jackson", 30, "M", "Into to Java");
-		Person instructorType1 = new Instructor("Jackson", 30, "M", "Into to Java");
-		Person studentType = new Student("Amit", 20, "M", new int[] { 50, 20, 90, 91, 65 });
+		Instructor instructorType = new Instructor("Jackson", 30, "M", "Into to Java", "instructor1@test.com");
+		Person instructorType1 = new Instructor("Jackson", 30, "M", "Into to Java", "person1@test.com");
+		Person studentType = new Student("Amit", 20, "M", new int[] { 50, 20, 90, 91, 65 }, "student@mail.com");
 		studentType.displayInfo();
 		System.out.println("Is instructorType is equal to studentType: " + instructorType.equals(studentType));
 		System.out.println("Is instructorType is equal to instructorType1: " + instructorType.equals(instructorType1));
 
-		Student student1 = new Student("Amit", 20, "M", new int[] { 50, 75, 98 });
-		Student student2 = new Student("Amit", 20, "M", new int[] { 50, 75, 98 });
-		Student student3 = new Student("Vineet", 20, "M", new int[] { 50, 75, 98 });
+		Student student1 = new Student("Amit", 20, "M", new int[] { 50, 75, 98 }, "student@mail.com");
+		Student student2 = new Student("Amit", 20, "M", new int[] { 50, 75, 98 }, "student@mail.com");
+		Student student3 = new Student("Vineet", 20, "M", new int[] { 50, 75, 98 }, "student@mail.com");
 		System.out.println("Is student1 is equal to student2: " + student1.equals(student2));
 		System.out.println("Is student1 is equal to student3: " + student1.equals(student3));
 
-		Person personOne = new Person("APerson", 30, "M");
+		Person personOne = new Person("APerson", 30, "M", "person@mail.com");
 		personOne.displayInfo();
 
-		Instructor instructor1 = new Instructor("Vaibhav", 35, "M", "Java");
+		Instructor instructor1 = new Instructor("Vaibhav", 35, "M", "Java", "instructo1@mail.com");
 		Instructor.Feedback instructor1feedback1 = instructor1.new Feedback(8); // create object of inner class
 		Instructor.Feedback instructor1feedback2 = instructor1.new Feedback(7); // create object of inner class
 		Instructor.Feedback instructor1feedback3 = instructor1.new Feedback(9); // create object of inner class
@@ -40,7 +40,7 @@ public class Demo {
 		instructor1.setArrayOfFeedback(feedbackArray);
 		instructor1.displayInfo();
 
-		Instructor instructor2 = new Instructor("Sunil", 30, "M", "Java");
+		Instructor instructor2 = new Instructor("Sunil", 30, "M", "Java", "instructo2@mail.com");
 		Instructor.Feedback instructor2feedback1 = instructor1.new Feedback(8); // create object of inner class
 		Instructor.Feedback instructor2feedback2 = instructor1.new Feedback(8); // create object of inner class
 		Instructor.Feedback instructor2feedback3 = instructor1.new Feedback(8); // create object of inner class

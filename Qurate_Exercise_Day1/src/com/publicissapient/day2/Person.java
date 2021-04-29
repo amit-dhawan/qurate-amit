@@ -14,10 +14,11 @@ public class Person extends Contactable implements Greetable {
 	private static Integer personCounter = Integer.valueOf(0);
 
 	// parameterized constructor1
-	public Person(String name, Integer age, String gender) {
+	public Person(String name, Integer age, String gender, String email) {
 		this.name = name;
 		this.age = age;
 		this.gender = gender;
+		this.setEmail_Id(email);
 		personCounter++;
 	}
 
@@ -32,7 +33,7 @@ public class Person extends Contactable implements Greetable {
 // defaut constructor. constructor chaining calling constructor1
 	public Person() {
 
-		this("_DEFAULT_", 0, "N/A");
+		this("_DEFAULT_", 0, "N/A", "no_email_set");
 	}
 
 	public static int getPersonCounter() {
@@ -69,7 +70,6 @@ public class Person extends Contactable implements Greetable {
 
 	public void displayInfo() {
 		greet();
-		
 		sb.append(" [name=").append(getName()).append(", Age=").append(age).append(", Gender=").append(getGender()).append("]").append(", person counter is: ");
 		sb.append(Person.getPersonCounter());
 		System.out.println(sb);

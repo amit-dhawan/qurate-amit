@@ -5,7 +5,7 @@ import com.publicissapient.day2.Person;
 public class Instructor extends Person {
 
 	private String subject;
-	private Integer rating;
+	private Float rating;
 	private Feedback[] arrayOfFeedback;
 
 	public Feedback[] getArrayOfFeedback() {
@@ -16,12 +16,12 @@ public class Instructor extends Person {
 		this.arrayOfFeedback = arrayOfFeedback;
 	}
 
-	public void setRating(Integer rating) {
+	public void setRating(Float rating) {
 		this.rating = rating;
 	}
 
-	public Instructor(String name, int age, String gender, String subject) {
-		super(name, age, gender);
+	public Instructor(String name, int age, String gender, String subject, String email) {
+		super(name, age, gender, email);
 		this.setSubject(subject);
 	}
 
@@ -33,7 +33,7 @@ public class Instructor extends Person {
 		return subject;
 	}
 
-	public Integer getRating() {
+	public Float getRating() {
 		return rating;
 	}
 
@@ -41,11 +41,8 @@ public class Instructor extends Person {
 		this.subject = subject;
 	}
 
-	public void setRating(int rating) {
-		this.rating = rating;
-	}
 
-	public String getRatingComments(Integer rating) {
+	public String getRatingComments(Float rating) {
 		String comment = null;
 		if (rating < 5) {
 			comment = "Poor";
@@ -107,7 +104,7 @@ public class Instructor extends Person {
 	}
 
 	void calculateEffectiveRating() {
-		int avg = 0;
+		float avg = 0;
 		for (int i = 0; i < arrayOfFeedback.length; i++) {
 			avg = avg + arrayOfFeedback[i].getRatingPoints();
 		}
@@ -116,9 +113,9 @@ public class Instructor extends Person {
 	}
 
 	public class Feedback { // inner class
-		private int ratingPoints;
+		private Integer ratingPoints;
 
-		public Feedback(int ratingPoints) {
+		public Feedback(Integer ratingPoints) {
 			if (ratingPoints >= 1 && ratingPoints <= 10) {
 				this.ratingPoints = ratingPoints;
 			} else {
@@ -126,7 +123,7 @@ public class Instructor extends Person {
 			}
 		}
 
-		public int getRatingPoints() {
+		public Integer getRatingPoints() {
 			return ratingPoints;
 		}
 

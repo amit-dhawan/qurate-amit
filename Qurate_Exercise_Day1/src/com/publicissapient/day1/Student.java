@@ -9,8 +9,8 @@ public class Student extends Person {
 	private int[] allSubjectMarks = new int[5];
 
 	// parameterized student constructor
-	public Student(String name, Integer age, String gender, int[] allSubjectMarks) {
-		super(name, age, gender);
+	public Student(String name, Integer age, String gender, int[] allSubjectMarks, String email) {
+		super(name, age, gender, email);
 		this.allSubjectMarks = allSubjectMarks;
 	}
 
@@ -48,9 +48,9 @@ public class Student extends Person {
 		System.out.println("Student[name=" + getName() + ", Age=" + getAge() + ", Gender=" + getGender() + ", Marks=["
 				+ allSubjectMarks[0] + "," + allSubjectMarks[1] + "," + allSubjectMarks[2] + "," + allSubjectMarks[3]
 				+ "," + allSubjectMarks[4] + "], MarksAverage=" + calAverageMarks() + ", Failed in Subjects="
-				+ failedCount() + "]"  + ", person counter is: " +Person.getPersonCounter());
+				+ failedCount() + "]" + ", person counter is: " + Person.getPersonCounter());
 	}
-	
+
 	@Override
 	public void greet() {
 		System.out.println("Hello Student");
@@ -77,6 +77,5 @@ public class Student extends Person {
 			return false;
 		return true;
 	}
-	
-	
+
 }
