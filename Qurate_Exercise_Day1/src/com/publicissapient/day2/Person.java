@@ -7,13 +7,14 @@ import com.publicissapient.day3.Greetable;
 public class Person extends Contactable implements Greetable {
 
 	private String name;
-	private int age;
+	private Integer age;
 	private String gender;
+	StringBuffer sb = new StringBuffer("Person");
 
-	private static int personCounter = 0;
+	private static Integer personCounter = Integer.valueOf(0);
 
 	// parameterized constructor1
-	public Person(String name, int age, String gender) {
+	public Person(String name, Integer age, String gender) {
 		this.name = name;
 		this.age = age;
 		this.gender = gender;
@@ -30,7 +31,7 @@ public class Person extends Contactable implements Greetable {
 
 // defaut constructor. constructor chaining calling constructor1
 	public Person() {
-		
+
 		this("_DEFAULT_", 0, "N/A");
 	}
 
@@ -68,7 +69,12 @@ public class Person extends Contactable implements Greetable {
 
 	public void displayInfo() {
 		greet();
-		System.out.println("Person [name=" + getName() + ", Age=" + age + ", Gender=" + getGender() + "]" + ", person counter is: " +Person.getPersonCounter());
+		
+		sb.append(" [name=").append(getName()).append(", Age=").append(age).append(", Gender=").append(getGender()).append("]").append(", person counter is: ");
+		sb.append(Person.getPersonCounter());
+		System.out.println(sb);
+//		System.out.println("Person [name=" + getName() + ", Age=" + age + ", Gender=" + getGender() + "]"
+//				+ ", person counter is: " + Person.getPersonCounter());
 	}
 
 	public void displayInfo(Student student) {
@@ -99,6 +105,37 @@ public class Person extends Contactable implements Greetable {
 	@Override
 	public void greet() {
 		System.out.println("hello Person !");
-		
 	}
+
+	
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Person other = (Person) obj;
+		if (age == null) {
+			if (other.age != null)
+				return false;
+		} else if (!age.equals(other.age))
+			return false;
+		if (gender == null) {
+			if (other.gender != null)
+				return false;
+		} else if (!gender.equals(other.gender))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+
+
+	
 }
