@@ -1,8 +1,13 @@
 package com.publicissapient.day2;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.publicissapient.day1.Student;
 import com.publicissapient.day3.Contactable;
 import com.publicissapient.day3.Greetable;
+import com.publicissapient.day5.exceptions.ContactException;
+import com.publicissapient.day5.exceptions.PersonException;
 
 public class Person extends Contactable implements Greetable {
 
@@ -14,24 +19,45 @@ public class Person extends Contactable implements Greetable {
 	private static Integer personCounter = Integer.valueOf(0);
 
 	// parameterized constructor1
-	public Person(String name, Integer age, String gender, String email) {
-		this.name = name;
-		this.age = age;
+	public Person(String name, Integer age, String gender, String email) throws ContactException, PersonException {
+
+		super(email);
+		String regex = "([a-zA-Z\\-]+){2,}\\s+([a-zA-Z\\-]+){2,}";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(name.trim());
+		System.out.println(matcher.matches());
+		System.out.println(name);
+		if (matcher.matches()) {
+			this.name = name;
+
+		} else {
+			throw new PersonException(
+					"Name: should only contain alphabets (a-z A-Z) and spaces. No numbers and special characters");
+		}
+
+		if (age > 10 && age < 80) {
+			this.age = age;
+		} else {
+			throw new PersonException("Age should be between 10 to 80");
+		}
+
 		this.gender = gender;
-		this.setEmail_Id(email);
+
 		personCounter++;
 	}
 
 	// parameterized constructor2
-	public Person(Student student) {
+	public Person(Student student) throws ContactException {
+		super("_NO_EMAIL_");
 		personCounter++;
 		this.name = student.getName();
 		this.age = student.getAge();
 		this.gender = student.getGender();
+
 	}
 
 // defaut constructor. constructor chaining calling constructor1
-	public Person() {
+	public Person() throws ContactException, PersonException {
 
 		this("_DEFAULT_", 0, "N/A", "no_email_set");
 	}
@@ -70,7 +96,8 @@ public class Person extends Contactable implements Greetable {
 
 	public void displayInfo() {
 		greet();
-		sb.append(" [name=").append(getName()).append(", Age=").append(age).append(", Gender=").append(getGender()).append("]").append(", person counter is: ");
+		sb.append(" [name=").append(getName()).append(", Age=").append(age).append(", Gender=").append(getGender())
+				.append("]").append(", person counter is: ");
 		sb.append(Person.getPersonCounter());
 		System.out.println(sb);
 //		System.out.println("Person [name=" + getName() + ", Age=" + age + ", Gender=" + getGender() + "]"
@@ -107,8 +134,6 @@ public class Person extends Contactable implements Greetable {
 		System.out.println("hello Person !");
 	}
 
-	
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -136,6 +161,4 @@ public class Person extends Contactable implements Greetable {
 		return true;
 	}
 
-
-	
 }

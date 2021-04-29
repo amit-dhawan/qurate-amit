@@ -1,12 +1,20 @@
 package com.publicissapient.day3;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.publicissapient.day2.Person;
+import com.publicissapient.day5.exceptions.ContactException;
+import com.publicissapient.day5.exceptions.InstructorException;
+import com.publicissapient.day5.exceptions.PersonException;
 
 public class Instructor extends Person {
 
 	private String subject;
 	private Float rating;
 	private Feedback[] arrayOfFeedback;
+	private String regex = "[A-Za-z]";
+	private Pattern pattern = Pattern.compile(regex);
 
 	public Feedback[] getArrayOfFeedback() {
 		return arrayOfFeedback;
@@ -20,12 +28,19 @@ public class Instructor extends Person {
 		this.rating = rating;
 	}
 
-	public Instructor(String name, int age, String gender, String subject, String email) {
+	public Instructor(String name, int age, String gender, String subject, String email)
+			throws ContactException, PersonException, InstructorException {
 		super(name, age, gender, email);
+		
+		Matcher matcher = pattern.matcher(subject);
+		if(matcher.find()) {
 		this.setSubject(subject);
+		} else {
+			throw new InstructorException("Subject name should be - alphanumeric characters (a-z A-Z 0-9) and spaces. No special chars");
+		}
 	}
 
-	public Instructor() {
+	public Instructor() throws ContactException, PersonException {
 
 	}
 
@@ -40,7 +55,6 @@ public class Instructor extends Person {
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
-
 
 	public String getRatingComments(Float rating) {
 		String comment = null;
@@ -115,11 +129,11 @@ public class Instructor extends Person {
 	public class Feedback { // inner class
 		private Integer ratingPoints;
 
-		public Feedback(Integer ratingPoints) {
+		public Feedback(Integer ratingPoints) throws InstructorException {
 			if (ratingPoints >= 1 && ratingPoints <= 10) {
 				this.ratingPoints = ratingPoints;
 			} else {
-				System.out.println("Invalid rating points provided !!");
+				throw new InstructorException("rating should be between 0 and 10");
 			}
 		}
 

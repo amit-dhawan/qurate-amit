@@ -3,15 +3,25 @@ package com.publicissapient.day1;
 import java.util.Arrays;
 
 import com.publicissapient.day2.Person;
+import com.publicissapient.day5.exceptions.ContactException;
+import com.publicissapient.day5.exceptions.PersonException;
+import com.publicissapient.day5.exceptions.StudentException;
 
 public class Student extends Person {
 
 	private int[] allSubjectMarks = new int[5];
 
 	// parameterized student constructor
-	public Student(String name, Integer age, String gender, int[] allSubjectMarks, String email) {
+	public Student(String name, Integer age, String gender, int[] allSubjectMarks, String email) throws ContactException, PersonException {
 		super(name, age, gender, email);
-		this.allSubjectMarks = allSubjectMarks;
+
+		for (int i = 0; i < allSubjectMarks.length; i++) {
+			if (allSubjectMarks[i] > 0 && allSubjectMarks[i] < 100) {
+				this.allSubjectMarks[i] = allSubjectMarks[i];
+			} else {
+				throw new StudentException("Marks should be beetween 0 and 100");
+			}
+		}
 	}
 
 	public int[] getAllSubjectMarks() {
