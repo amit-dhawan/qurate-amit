@@ -13,7 +13,7 @@ public class Instructor extends Person {
 	private String subject;
 	private Float rating;
 	private Feedback[] arrayOfFeedback;
-	private String regex = "[A-Za-z]";
+	private String regex = "^[a-zA-Z\s0-9]+$";
 	private Pattern pattern = Pattern.compile(regex);
 
 	public Feedback[] getArrayOfFeedback() {

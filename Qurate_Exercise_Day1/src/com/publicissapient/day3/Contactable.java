@@ -8,7 +8,7 @@ import com.publicissapient.day5.exceptions.ContactException;
 public abstract class Contactable {
 
 	private String email_Id;
-	private String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
+	private String regex = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+[.][a-zA-Z]+$";
 	private Pattern pattern = Pattern.compile(regex);
 
 	public Contactable(String email) throws ContactException {

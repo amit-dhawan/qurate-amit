@@ -11,7 +11,7 @@ public class Demo {
 		System.out.println("Thread name: " + Thread.currentThread().getName());
 
 		try {
-			Instructor instructorType = new Instructor("amit dhawan", 30, "M", "Into to Java", "instructor1@test.com");
+			Instructor instructorType = new Instructor("amit dhawan", 35, "M", "Computers", "abc@xyz.pqr");
 			Person instructorType1 = new Instructor("Jackson Miller", 30, "M", "Into to Java", "person1@test.com");
 			Person studentType = new Student("Vineet Tikoo", 20, "M", new int[] { 50, 20, 90, 91, 65 }, "student@mail.com");
 
