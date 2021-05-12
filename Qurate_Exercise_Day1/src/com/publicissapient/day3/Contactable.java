@@ -1,11 +1,12 @@
 package com.publicissapient.day3;
 
+import java.io.Serializable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.publicissapient.day5.exceptions.ContactException;
 
-public abstract class Contactable {
+public abstract class Contactable implements Serializable {
 
 	private String email_Id;
 	private String regex = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+[.][a-zA-Z]+$";
@@ -13,12 +14,14 @@ public abstract class Contactable {
 
 	public Contactable(String email) throws ContactException {
 
+		System.out.println("emai is " + email);
+
 		Matcher matcher = pattern.matcher(email);
 
 		if (!matcher.find()) {
 
-			throw new ContactException("email passed does not matches the format - abc@xyz.pqr" );
-			
+			throw new ContactException("email passed does not matches the format - abc@xyz.pqr");
+
 		} else {
 			this.email_Id = email;
 		}

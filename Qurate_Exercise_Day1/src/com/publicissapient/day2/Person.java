@@ -1,5 +1,6 @@
 package com.publicissapient.day2;
 
+import java.io.Serializable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,12 +10,16 @@ import com.publicissapient.day3.Greetable;
 import com.publicissapient.day5.exceptions.ContactException;
 import com.publicissapient.day5.exceptions.PersonException;
 
-public class Person extends Contactable implements Greetable {
+public class Person extends Contactable implements Greetable, Serializable {
 
 	private String name;
 	private Integer age;
-	private String gender;
+	private GENDER gender;
 	StringBuffer sb = new StringBuffer("Person");
+
+	public enum GENDER {
+		M, F
+	}
 
 	private static Integer personCounter = Integer.valueOf(0);
 
@@ -41,7 +46,13 @@ public class Person extends Contactable implements Greetable {
 			throw new PersonException("Age should be between 10 to 80");
 		}
 
-		this.gender = gender;
+		if (gender.equalsIgnoreCase("Male") || gender.equalsIgnoreCase("M")) {
+			this.gender = GENDER.M;
+		} else if (gender.equalsIgnoreCase("Female") || gender.equalsIgnoreCase("F")) {
+			this.gender = GENDER.F;
+		} else {
+			new PersonException("gender should be M or F");
+		}
 
 		personCounter++;
 	}
@@ -86,11 +97,11 @@ public class Person extends Contactable implements Greetable {
 		this.age = age;
 	}
 
-	public String getGender() {
+	public GENDER getGender() {
 		return gender;
 	}
 
-	public void setGender(String gender) {
+	public void setGender(GENDER gender) {
 		this.gender = gender;
 	}
 

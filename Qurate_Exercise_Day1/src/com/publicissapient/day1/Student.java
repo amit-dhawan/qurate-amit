@@ -1,5 +1,6 @@
 package com.publicissapient.day1;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
 import com.publicissapient.day2.Person;
@@ -7,7 +8,7 @@ import com.publicissapient.day5.exceptions.ContactException;
 import com.publicissapient.day5.exceptions.PersonException;
 import com.publicissapient.day5.exceptions.StudentException;
 
-public class Student extends Person {
+public class Student extends Person implements Serializable {
 
 	private int[] allSubjectMarks = new int[5];
 

@@ -26,42 +26,39 @@ public class WorkTest {
 
 		t1.start();
 		try {
+
 			t1.join();
+
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		t2.start();
-		
+
 		try {
 			t2.join();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		t3.start();
 		try {
 			t3.join();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		t4.start();
 		try {
 			t4.join();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		t5.start();
 		try {
 			t5.join();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
