@@ -1,53 +1,55 @@
 package com.publicissapient.day1;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+
 import com.publicissapient.day2.Person;
 import com.publicissapient.day3.Instructor;
 import com.publicissapient.day5.exceptions.ContactException;
+import com.publicissapient.day5.exceptions.EmailUniqueness;
 import com.publicissapient.day5.exceptions.PersonException;
+import com.sapient.day7.Invitation;
 
 public class Demo {
 
-	public static void main(String[] args) {
-		System.out.println("Thread name: " + Thread.currentThread().getName());
+	public static void main(String[] args) throws EmailUniqueness {
 
 		try {
-			Instructor instructorType = new Instructor("amit dhawan", 35, "M", "Computers", "abc@xyz.pqr");
-			Person instructorType1 = new Instructor("Jackson Miller", 30, "M", "Into to Java", "person1@test.com");
-			Person studentType = new Student("Vineet Tikoo", 20, "M", new int[] { 50, 20, 90, 91, 65 }, "student@mail.com");
+			ArrayList<Integer> marksList = new ArrayList<>();
+			marksList.add(10);
+			marksList.add(76);
+			marksList.add(80);
+			marksList.add(90);
+			marksList.add(88);
 
-			System.out.println("Is instructorType is equal to studentType: " + instructorType.equals(studentType));
-			System.out.println(
-					"Is instructorType is equal to instructorType1: " + instructorType.equals(instructorType1));
-			studentType.displayInfo();
-
+			Student student1 = new Student("Amit Person", "M", "1990-01-14", marksList, "student@mail.com");
+			student1.displayInfo();
+//			System.out.println("\n ----------------- \n");
 		} catch (ContactException | PersonException e) {
 
 			e.printStackTrace();
 		}
 
+		Person personOne = null;
 		try {
-			Student student1 = new Student("Amit Dhawan", 20, "M", new int[] { 50, 75, 98 }, "student@mail.com");
-			Student student2 = new Student("Pradeep Goyal", 20, "M", new int[] { 50, 75, 98 }, "student@mail.com");
-			Student student3 = new Student("Deepak Test", 20, "M", new int[] { 50, 75, 98 }, "student@mail.com");
-			System.out.println("Is student1 is equal to student2: " + student1.equals(student2));
-			System.out.println("Is student1 is equal to student3: " + student1.equals(student3));
+			personOne = new Person("Amit Dhawan", "M", "1985-12-19", "person@mail.com");
 
-		} catch (ContactException | PersonException e) {
-
-			e.printStackTrace();
-		}
-
-		Person personOne;
-		try {
-			personOne = new Person("New Person", 30, "M", "person@mail.com");
 			personOne.displayInfo();
+			System.out.println();
+
+			/*
+			 * 
+			 * z * System.out.println("\n ----------------- \n");
+			 */
 		} catch (ContactException | PersonException e) {
 
 			e.printStackTrace();
 		}
 
 		try {
-			Instructor instructor1 = new Instructor("Vaibhav Testing", 35, "M", "Java", "instructo1@mail.com");
+			Instructor instructor1 = new Instructor("Vaibhav Instructor", "M", "1975-10-28", "Java",
+					"instructo1@mail.com");
 			Instructor.Feedback instructor1feedback1 = instructor1.new Feedback(8); // create object of inner class
 			Instructor.Feedback instructor1feedback2 = instructor1.new Feedback(7); // create object of inner class
 			Instructor.Feedback instructor1feedback3 = instructor1.new Feedback(9); // create object of inner class
@@ -64,7 +66,18 @@ public class Demo {
 			instructor1.setArrayOfFeedback(feedbackArray);
 			instructor1.displayInfo();
 
-			Instructor instructor2 = new Instructor("Sunil Kumar", 30, "M", "Java", "instructo2@mail.com");
+			Invitation<Instructor> inviteInstructor = new Invitation<Instructor>("Java", "Please come to Java class...",
+					LocalDate.parse("2021-05-20"), instructor1);
+
+			Invitation<Person> invitePerson = new Invitation<Person>("Java", "Please come to Java class...",
+					LocalDate.parse("2021-05-27"), personOne);
+
+			inviteInstructor.sendInvitation();
+			inviteInstructor.forwardInvitation(invitePerson);
+
+//			System.out.println("\n ----------------- \n");
+
+			Instructor instructor2 = new Instructor("Sunil Kumar", "M", "1980-01-30", "Java", "instructo2@mail.com");
 			Instructor.Feedback instructor2feedback1 = instructor1.new Feedback(8); // create object of inner class
 			Instructor.Feedback instructor2feedback2 = instructor1.new Feedback(8); // create object of inner class
 			Instructor.Feedback instructor2feedback3 = instructor1.new Feedback(8); // create object of inner class
@@ -77,9 +90,9 @@ public class Demo {
 			feedbacks2[2] = instructor2feedback3;
 			feedbacks2[3] = instructor2feedback4;
 			feedbacks2[4] = instructor2feedback5;
-			
+
 			instructor2.setArrayOfFeedback(feedbacks2);
-			instructor2.displayInfo();
+
 		} catch (ContactException | PersonException e) {
 
 			e.printStackTrace();
@@ -113,7 +126,7 @@ public class Demo {
 		int maleCount = 0;
 		int femaleCount = 0;
 		for (int i = 0; i <= s.length - 1; i++) {
-			if (s[i].getGender().equals( "M")) {
+			if (s[i].getGender().equals("M")) {
 				maleCount++;
 
 			} else {

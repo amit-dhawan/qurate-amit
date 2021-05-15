@@ -5,11 +5,13 @@ import java.util.regex.Pattern;
 
 import com.publicissapient.day2.Person;
 import com.publicissapient.day5.exceptions.ContactException;
+import com.publicissapient.day5.exceptions.EmailUniqueness;
 import com.publicissapient.day5.exceptions.InstructorException;
 import com.publicissapient.day5.exceptions.PersonException;
 
 public class Instructor extends Person {
 
+	private static final long serialVersionUID = 1001L;
 	private String subject;
 	private Float rating;
 	private Feedback[] arrayOfFeedback;
@@ -28,19 +30,20 @@ public class Instructor extends Person {
 		this.rating = rating;
 	}
 
-	public Instructor(String name, int age, String gender, String subject, String email)
-			throws ContactException, PersonException, InstructorException {
-		super(name, age, gender, email);
-		
+	public Instructor(String name, String gender, String dob, String subject, String email)
+			throws ContactException, PersonException, InstructorException, EmailUniqueness {
+		super(name, gender, dob, email);
+
 		Matcher matcher = pattern.matcher(subject);
-		if(matcher.find()) {
-		this.setSubject(subject);
+		if (matcher.find()) {
+			this.setSubject(subject);
 		} else {
-			throw new InstructorException("Subject name should be - alphanumeric characters (a-z A-Z 0-9) and spaces. No special chars");
+			throw new InstructorException(
+					"Subject name should be - alphanumeric characters (a-z A-Z 0-9) and spaces. No special chars");
 		}
 	}
 
-	public Instructor() throws ContactException, PersonException {
+	public Instructor() throws ContactException, PersonException, EmailUniqueness {
 
 	}
 
@@ -76,14 +79,14 @@ public class Instructor extends Person {
 	public void displayInfo() {
 		greet();
 		calculateEffectiveRating();
-		System.out.println("Instructor[name=" + getName() + ", Age=" + getAge() + ", Gender=" + getGender()
-				+ ", Subject Name=" + getSubject() + ", Rating=" + getRating() + ", Rating Comment="
-				+ getRatingComments(getRating()) + "]" + ", person counter is: " + Person.getPersonCounter());
+		System.out.println("Instructor[name=" + getName() + ", Gender=" + getGender() + ", Subject Name=" + getSubject()
+				+ ", Rating=" + getRating() + ", Rating Comment=" + getRatingComments(getRating()) + "]"
+				+ ", person counter is: " + Person.getPersonCounter());
 	}
 
 	@Override
 	public void greet() {
-		System.out.println("Hello Instructor");
+		System.out.println("Hello Instructor !");
 	}
 
 	@Override

@@ -9,14 +9,16 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 import com.publicissapient.day1.Student;
 import com.publicissapient.day5.exceptions.ContactException;
+import com.publicissapient.day5.exceptions.EmailUniqueness;
 import com.publicissapient.day5.exceptions.PersonException;
 
 public class DemoStudentData {
 
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws FileNotFoundException, EmailUniqueness {
 		// BufferReader class to read user's input from console. Stream is System.in
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		String proceed = "Y";
@@ -31,6 +33,8 @@ public class DemoStudentData {
 				int age = Integer.parseInt(reader.readLine());
 				System.out.println("Enter Student gender");
 				String gender = reader.readLine();
+				System.out.println("Enter Student DOB in yyyy-MM-dd format");
+				String dob = reader.readLine();
 				System.out.println("Enter Student marks");
 				String marks = reader.readLine();
 				String[] studentMarks = marks.split(" ");
@@ -44,7 +48,11 @@ public class DemoStudentData {
 				String email = reader.readLine();
 
 				try {
-					students[counter] = new Student(name, age, gender, allSubjectMarks, email);
+					ArrayList<Integer> marksList = new ArrayList<>();
+					marksList.add(50);
+					marksList.add(76);
+					marksList.add(80);
+					students[counter] = new Student(name, gender, dob, marksList, email);
 				} catch (ContactException | PersonException e) {
 					e.printStackTrace();
 				}
@@ -82,6 +90,7 @@ public class DemoStudentData {
 
 					if (s != null) {
 						count++;
+						System.out.println();
 						s.displayInfo();
 
 					} else {
