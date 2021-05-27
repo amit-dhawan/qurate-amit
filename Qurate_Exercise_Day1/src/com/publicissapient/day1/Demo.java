@@ -15,6 +15,8 @@ public class Demo {
 
 	public static void main(String[] args) throws EmailUniqueness {
 
+		Student student1 = null;
+
 		try {
 			ArrayList<Integer> marksList = new ArrayList<>();
 			marksList.add(10);
@@ -23,7 +25,7 @@ public class Demo {
 			marksList.add(90);
 			marksList.add(88);
 
-			Student student1 = new Student("Amit Person", "M", "1990-01-14", marksList, "student@mail.com");
+			student1 = new Student("Ravi Student", "M", "1990-01-14", marksList, "student@mail.com");
 			student1.displayInfo();
 //			System.out.println("\n ----------------- \n");
 		} catch (ContactException | PersonException e) {
@@ -35,6 +37,7 @@ public class Demo {
 		try {
 			personOne = new Person("Amit Dhawan", "M", "1985-12-19", "person@mail.com");
 
+			System.out.println();
 			personOne.displayInfo();
 			System.out.println();
 
@@ -72,8 +75,13 @@ public class Demo {
 			Invitation<Person> invitePerson = new Invitation<Person>("Java", "Please come to Java class...",
 					LocalDate.parse("2021-05-27"), personOne);
 
+			Invitation<Student> inviteStudent = new Invitation<Student>("Java", "Please come to Java class...",
+					LocalDate.parse("2021-05-28"), student1);
+
 			inviteInstructor.sendInvitation();
 			inviteInstructor.forwardInvitation(invitePerson);
+			inviteStudent.sendInvitation();
+			
 
 //			System.out.println("\n ----------------- \n");
 
